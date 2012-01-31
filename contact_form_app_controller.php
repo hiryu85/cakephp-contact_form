@@ -1,4 +1,3 @@
 <?php
-class ContactFormAppController extends AppController {
-}
+class ContactFormAppController extends AppController {}
  
