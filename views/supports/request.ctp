@@ -2,7 +2,7 @@
     echo $this->Form->create('ContactMessage', array('url' => Router::url('', true) ))."\n".
     echo $this->Form->inputs(
         array(
-            'legend' => __d('contact_form', 'Send a message to `'.$contact['name'].'`', true),
+            'legend' => sprintf(__d('contact_form', 'Send a message to: %s', true), $contact['name']),
             
             'ContactMessage.full_name' => array(
                 'label' => __d('contact_form', 'Your name and surname', true),

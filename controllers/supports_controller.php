@@ -61,7 +61,7 @@ class SupportsController extends ContactFormAppController {
         if ($this->Email->send($this->data['ContactMessage']['body'], null, 'default')) 
             $this->Session->setFlash(__d('contact_form', 'Message has been sent.. Thank You', true), 'flash_success');
         else
-             $this->Session->setFlash(__d('contact_form', 'Message cannnot be sent to '.$addressLists[$slug]['address'], true), 'flash_failure');
+             $this->Session->setFlash(sprintf(__d('contact_form', 'Message cannnot be sent to %s', true), $addressLists[$slug]['name']), 'flash_failure');
 
         $this->redirect($this->referer('/'));
    }
