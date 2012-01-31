@@ -2,13 +2,14 @@
 class SupportsController extends ContactFormAppController {
     var $name = 'Supports';
     var $components = array('Email');
-    var $uses = array('ContactForm.ContactMessage');
+    // var $uses = array('ContactForm.ContactMessage');
+    var $uses = null;
     
     function beforeFilter() {
         parent::beforeFilter();
-        
+                
         // Override here EmailComponent options
-        $this->Email->layout = 'foo';
+        // $this->Email->layout = 'foo';
         $this->Email->sendAs = 'text';
     }
      
@@ -33,14 +34,16 @@ class SupportsController extends ContactFormAppController {
         $this->set('contact', $addressLists[$slug]);
 
         if (empty($this->data)) return;
+        $this->ContactMessage = ClassRegistry::init('ContactForm.ContactMessage');
         $this->ContactMessage->create($this->data);
         if (!$this->ContactMessage->validates()) return;
                     
-        $full_name = $this->data['ContactMessage']['full_name'];
+        $name = $this->data['ContactMessage']['name'];
+        $surname = $this->data['ContactMessage']['surname'];
         $email = $this->data['ContactMessage']['email'];
         
         $this->Email->to = $addressLists[$slug]['address'];        
-        $this->Email->from = sprintf('%s <%s>', $full_name, $email);
+        $this->Email->from = sprintf('%s %s <%s>', $name, $surname, $email);
         $this->Email->subject = sprintf(
             '[%s] %s', 
             (!empty($addressLists[$slug]['prefix']) ? $addressLists[$slug]['prefix'] : 'ContactForm'),
@@ -52,7 +55,7 @@ class SupportsController extends ContactFormAppController {
         );
         
         $this->set('to', $addressLists[$slug]);
-        $this->set('from', compact('full_name', 'email'));
+        $this->set('from', compact('name', 'email', 'surname'));
         $this->set('host', Router::url('/', true));
 
         if ($this->Email->send($this->data['ContactMessage']['body'], null, 'default')) 
