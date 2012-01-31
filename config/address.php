@@ -1,13 +1,45 @@
 <?php
-    $config['ContactForm']['mail']['info']['name']  = 'GDM';
-    $config['ContactForm']['mail']['info']['address']  = 'stoneddea7h@gmail.com';
-    $config['ContactForm']['mail']['info']['prefix']  = 'GDM';
+ /**
+  * Contact_form plugin configurations
+  *
+  * Create new address: append to array $config['ContactForm']['mail'] an array like this:
+  * 
+  *     array(
+  *         'slug-name' => array(
+  *              // Address
+  *              'name' => 'Name and surname',   # REQUIRED 
+  *              'address' => 'your-email'       # REQUIRED
+  *              // Subject
+  *              'prefix' => 'Webmaster'         # OPTIONAL: Subject prefix,
+  *              'subject' => 'Info abaout'      # OPTIONAL: Subject text
+  *         )
+  *     )
+  *
+  * All OPTIONAL fields can be not sets.
+  * 
+  */
 
-    $config['ContactForm']['mail']['rivenditori']['name']  = 'rivenditori';
-    $config['ContactForm']['mail']['rivenditori']['address']  = 'stoneddea7h@gmail.com';
-    $config['ContactForm']['mail']['rivenditori']['prefix']  = 'Rivenditori GDM';
-    
-    
-    $config['ContactForm']['mail']['webmaster']['name']  = 'Webmaster';
-    $config['ContactForm']['mail']['webmaster']['address']  = 'stoneddea7h@gmail.com';
-    
+
+
+
+// Webmaster address
+$config['ContactForm']['mail']['webmaster'] = array(
+        // Address
+        'name' => 'Foo bar',             # REQUIRED
+        'address' => 'foo@bar.org'       # REQUIRED,
+        
+        // Subject
+        'prefix' => 'Webmaster'         # OPTIONAL: Subject prefix,
+        'subject' => 'Info abaout'      # OPTIONAL: Subject text
+);
+
+
+// Info address
+$config['ContactForm']['mail']['supports'] = array(
+        // Address
+        'name' => 'Supports team',
+        'address' => 'support'
+        // Subject
+        'prefix' => 'Info'                      # OPTIONAL: Subject prefix,
+        'subject' => 'I need help, please'      # OPTIONAL: Subject text
+);
